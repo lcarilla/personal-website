@@ -8,7 +8,7 @@ pipeline {
             }
         }
         stage('Push') {
-
+			sh 'ls -la'
         }
     }
 }
