@@ -3,13 +3,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-            	sh 'sleep 10'
-            	sh 'echo lol'
+            	sh 'echo ${imageTag}'
+            	sh 'docker build -t localhost:8085/luis-website:${imageTag} .'
             }
         }
         stage('Push') {
 			steps {
-				sh 'ls -la'
+				sh 'docker push localhost:8085/luis-website:${imageTag}'
 			}
         }
     }
