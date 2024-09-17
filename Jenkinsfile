@@ -9,6 +9,7 @@ pipeline {
         }
         stage('Push') {
 			steps {
+				sh 'docker login localhost:8085 -u ${dockerUser} -p ${dockerPw}'
 				sh 'docker push localhost:8085/luis-website:${imageTag}'
 			}
         }
