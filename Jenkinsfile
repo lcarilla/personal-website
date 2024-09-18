@@ -9,8 +9,10 @@ pipeline {
         }
         stage('Push') {
 			steps {
-				sh 'docker login localhost:8085 -u ${dockerUser} -p ${dockerPw}'
-				sh 'docker push localhost:8085/luis-website:${imageTag}'
+				withCredentials([usernamePassword(credentialsId: 'registry-auth', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+					sh 'docker login localhost:8085 -u $USERNAME -p $PASSWORD'
+					sh 'docker push localhost:8085/luis-website:${imageTag}'
+				}
 			}
         }
     }
